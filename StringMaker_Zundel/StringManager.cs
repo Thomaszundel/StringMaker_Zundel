@@ -32,7 +32,7 @@ namespace StringMaker_Zundel
             inputString = s;
             if (PreserveCaseLocation == true)
             {
-                string finalString = "";
+                string finalString = null;
                 string outputString = null;
                 string word = s;
                 Stack<char> wordStack = new Stack<char>();
@@ -51,66 +51,27 @@ namespace StringMaker_Zundel
                     outputString += wordStack.Pop();
                 }
                 outputString = outputString.ToLower();
+                char[] outputStringLower = outputString.ToCharArray();
                 int numOfUpper = uppercaseNums.Count; 
+
                 for (int i = 0; i < numOfUpper ; i++)
                 {
-                    if(i == 0)
-                    {
-                        int upperLocation = uppercaseNums.Pop();
-                        char foundChar = outputString[upperLocation];
-                        char uppercaseChar = char.ToUpper(foundChar);
-                        for (int c = 0; c < outputString.Length; c++)
-                        {
-                            char finalState = outputString[c];
-                            if (c == upperLocation)
-                            {
-                                finalState = uppercaseChar;
-                                finalString = finalString + finalState;
-                            }
-                            else
-                            {
-                                finalString = finalString + finalState;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        string temp = finalString;
-                        finalString = null;
-                        int upperLocation = uppercaseNums.Pop();
-                        char foundChar = temp[upperLocation];
-                        char uppercaseChar = char.ToUpper(foundChar);
-                        for (int c = 0; c < temp.Length; c++)
-                        {
-                            char finalState = temp[c];
-                            if (c == upperLocation)
-                            {
-                                finalState = uppercaseChar;
-                                finalString = finalString + finalState;
-                            }
-                            else
-                            {
-                                finalString = finalString + finalState;
-                            }
-                        }
-                    }
+                    int temp = uppercaseNums.Pop();
+                   
+                    outputStringLower[temp] = char.ToUpper( outputStringLower[temp]);
+
+                    
                 }
+                for (int i = 0; i < outputStringLower.Length; i++)
+                {
+                    finalString += outputStringLower[i];
+                }
+
                 return finalString;
             }
             else
             {
-                string outputString = null;
-                string word = s;
-                Stack<char> wordStack = new Stack<char>();
-                for (int i = 0; i < word.Length; i++)
-                {
-                    wordStack.Push(word[i]);
-                }
-                for (int i = 0; i < word.Length; i++)
-                {
-                    outputString += wordStack.Pop();
-                }
-                return outputString;
+                return Reverse(s);
             }
         }
 
@@ -129,7 +90,7 @@ namespace StringMaker_Zundel
         {
             string s = inputString;
             int total = 0;
-            string name = "";
+            string name = null;
             foreach (char c in s)
             {
                 int singleLetter = 0;
@@ -139,9 +100,12 @@ namespace StringMaker_Zundel
             string namedNumber = total.ToString();
             for (int i = 0; i < namedNumber.Length; i++)
             {
-                string temp = "";
+                string temp = null;
                 switch (namedNumber[i])
                 {
+                    case '0':
+                        temp = "Zero";
+                            break;
                     case '1':
                         temp = "One";
                         break;
@@ -186,7 +150,7 @@ namespace StringMaker_Zundel
         }
         public override bool Equals(object obj)
         {
-            if (obj.ToString() == inputString)
+            if (obj.ToString() == inputString && obj is string)
             {
                 return true;
             }

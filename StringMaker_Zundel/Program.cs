@@ -3,7 +3,7 @@
 // IT113
 // NOTES:
 // BEHAVIORS NOT IMPLIMENTED AND WHY: I think I got it all, The reverse while keeping uppercase letter
-// placement proved to be harder then i thought but I figured out a way although its not pretty!
+// placement proved to be harder then i thought but I figured out a way!
 
 namespace StringMaker_Zundel
 {
